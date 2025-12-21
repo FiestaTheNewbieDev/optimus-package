@@ -8,6 +8,13 @@
       "when": 1766314371843,
       "tag": "0000_nifty_thunderbolt_ross",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1766339616231,
+      "tag": "0001_foamy_sabretooth",
+      "breakpoints": true
     }
   ]
 }
