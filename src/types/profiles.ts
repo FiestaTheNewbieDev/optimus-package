@@ -25,13 +25,15 @@ export type Profile = {
   uuid: ProfileEntity['uuid'];
   firstName: ProfileEntity['firstName'];
   lastName: ProfileEntity['lastName'];
+  fullName: string;
   title: ProfileEntity['title'];
   biography: ProfileEntity['biography'];
   birthDate: ProfileEntity['birthDate'];
-  linkedIn: {
+  age: number | null;
+  linkedIn?: {
     profileUrl: string;
   };
-  gitHub: {
+  gitHub?: {
     profileUrl: string;
   };
   skills: ProfileSkill[];

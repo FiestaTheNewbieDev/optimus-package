@@ -72,10 +72,10 @@
     "typescript-eslint": "^8.50.0"
   },
   "lint-staged": {
-    "*.{js, ts}": [
+    "*.{js,ts}": [
       "npm run lint:fix"
     ],
-    "*.{json,md}": [
+    "*.{json,md,yml,yaml}": [
       "npm run format"
     ]
   }

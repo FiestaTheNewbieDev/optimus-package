@@ -11,7 +11,7 @@ export function createDrizzleClient(config: {
   password: string;
   database: string;
   ssl: boolean;
-}): DrizzleClient {
+}): { client: DrizzleClient; pool: Pool } {
   const pool: Pool = new Pool({
     host: config.host,
     port: config.port,
@@ -21,7 +21,9 @@ export function createDrizzleClient(config: {
     ssl: config.ssl ? { rejectUnauthorized: false } : false,
   });
 
-  return drizzle(pool, {
+  const client = drizzle(pool, {
     schema,
   });
+
+  return { client, pool };
 }
