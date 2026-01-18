@@ -29,6 +29,13 @@
       "when": 1768672665531,
       "tag": "0003_premium_krista_starr",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1768722816009,
+      "tag": "0004_careful_vulcan",
+      "breakpoints": true
     }
   ]
 }

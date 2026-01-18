@@ -1,3 +1,4 @@
+export { contactMessageSchema } from './contact-message.schema';
 export { educationSchema, educationSkillsSchema } from './education.schema';
 export { experienceSchema, experienceSkillsSchema } from './experience.schema';
 export {
