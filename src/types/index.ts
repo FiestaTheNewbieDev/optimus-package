@@ -1,3 +1,4 @@
+export * from './contact-messages';
 export * from './education';
 export * from './experiences';
 export * from './generics';

@@ -1,3 +1,4 @@
+import { profileSchema } from '@schemas/profile.schema';
 import { pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 
 export const FIRST_NAME_MIN_LENGTH = 1;
@@ -15,6 +16,9 @@ export const PHONE_NUMBER_MAX_LENGTH = 32;
 
 export const contactMessageSchema = pgTable('contact_messages', {
   uuid: uuid('uuid').primaryKey().defaultRandom(),
+  profileUuid: uuid('profile_uuid')
+    .notNull()
+    .references(() => profileSchema.uuid, { onDelete: 'cascade' }),
 
   firstName: varchar('first_name', { length: FIRST_NAME_MAX_LENGTH }).notNull(),
   lastName: varchar('last_name', { length: LAST_NAME_MAX_LENGTH }).notNull(),
