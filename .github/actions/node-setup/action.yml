@@ -1,4 +1,5 @@
 name: 'Common Node.js Setup'
+description: 'Sets up Node.js environment and installs dependencies'
 
 inputs:
   node-version:

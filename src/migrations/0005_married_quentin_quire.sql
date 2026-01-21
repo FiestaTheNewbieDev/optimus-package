@@ -1,0 +1,2 @@
+ALTER TABLE "contact_messages" ADD COLUMN "profile_uuid" uuid NOT NULL;--> statement-breakpoint
+ALTER TABLE "contact_messages" ADD CONSTRAINT "contact_messages_profile_uuid_profiles_uuid_fk" FOREIGN KEY ("profile_uuid") REFERENCES "public"."profiles"("uuid") ON DELETE cascade ON UPDATE no action;
