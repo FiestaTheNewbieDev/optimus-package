@@ -4,10 +4,17 @@ import { InferSelectModel } from 'drizzle-orm';
 export type SkillEntity = InferSelectModel<typeof skillSchema>;
 
 export type Skill = {
-  uuid: SkillEntity['uuid'];
+  slug: SkillEntity['slug'];
   label: SkillEntity['label'];
   iconUrl: SkillEntity['iconUrl'];
   createdAt: SkillEntity['createdAt'];
   updatedAt: SkillEntity['updatedAt'];
   deletedAt: SkillEntity['deletedAt'];
 };
+
+export type AssociatedSkill<TData = unknown> = {
+  slug: SkillEntity['slug'];
+  label: SkillEntity['label'];
+  iconUrl: SkillEntity['iconUrl'];
+  associatedAt: Date;
+} & TData;

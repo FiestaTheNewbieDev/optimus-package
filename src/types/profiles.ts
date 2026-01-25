@@ -1,4 +1,4 @@
-import { SkillEntity } from '@/index';
+import { AssociatedSkill } from '@/types/skills';
 import {
   gitHubProfileSchema,
   linkedInProfileSchema,
@@ -18,12 +18,7 @@ export type LinkedInProfileEntity = InferSelectModel<
 export type GitHubProfileEntity = InferSelectModel<typeof gitHubProfileSchema>;
 export type ProfileSkillsEntity = InferSelectModel<typeof profileSkillsSchema>;
 
-export type ProfileSkill = {
-  uuid: SkillEntity['uuid'];
-  label: SkillEntity['label'];
-  iconUrl: SkillEntity['iconUrl'];
-  associatedAt: ProfileSkillsEntity['createdAt'];
-};
+export type ProfileSkill = AssociatedSkill;
 
 export type Profile = {
   uuid: ProfileEntity['uuid'];

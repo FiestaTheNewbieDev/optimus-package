@@ -1,4 +1,4 @@
-import { SkillEntity } from '@/types/skills';
+import { AssociatedSkill } from '@/types/skills';
 import {
   educationSchema,
   educationSkillsSchema,
@@ -11,12 +11,7 @@ export type EducationSkillsEntity = InferSelectModel<
   typeof educationSkillsSchema
 >;
 
-export type EducationSkill = {
-  uuid: SkillEntity['uuid'];
-  label: SkillEntity['label'];
-  iconUrl: SkillEntity['iconUrl'];
-  associatedAt: EducationSkillsEntity['createdAt'];
-};
+export type EducationSkill = AssociatedSkill;
 
 export type Education = {
   uuid: EducationEntity['uuid'];
