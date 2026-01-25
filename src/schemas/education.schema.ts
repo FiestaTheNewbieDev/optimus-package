@@ -8,6 +8,7 @@ import {
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
+import { SLUG_MAX_LENGTH as SKILL_SLUG_MAX_LENGTH } from './skill.schema';
 
 export const EDUCATION_TITLE_MIN_LENGTH = 3;
 export const EDUCATION_TITLE_MAX_LENGTH = 255;
@@ -40,12 +41,13 @@ export const educationSkillsSchema = pgTable(
     educationUuid: uuid('education_uuid')
       .notNull()
       .references(() => educationSchema.uuid, { onDelete: 'cascade' }),
-    skillUuid: uuid('skill_uuid')
+    skillSlug: varchar('skill_slug', { length: SKILL_SLUG_MAX_LENGTH })
       .notNull()
-      .references(() => skillSchema.uuid, { onDelete: 'cascade' }),
+      .references(() => skillSchema.slug, { onDelete: 'cascade' }),
+
     createdAt: timestamp('created_at', { withTimezone: true })
       .notNull()
       .defaultNow(),
   },
-  (table) => [primaryKey({ columns: [table.educationUuid, table.skillUuid] })],
+  (table) => [primaryKey({ columns: [table.educationUuid, table.skillSlug] })],
 );

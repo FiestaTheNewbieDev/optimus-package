@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1766314371843,
-      "tag": "0000_nifty_thunderbolt_ross",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1766339616231,
-      "tag": "0001_foamy_sabretooth",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1767864384450,
-      "tag": "0002_third_winter_soldier",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1768672665531,
-      "tag": "0003_premium_krista_starr",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1768722816009,
-      "tag": "0004_careful_vulcan",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1768976860804,
-      "tag": "0005_married_quentin_quire",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1769253359279,
-      "tag": "0006_useful_true_believers",
+      "when": 1769333077071,
+      "tag": "0000_equal_gateway",
       "breakpoints": true
     }
   ]

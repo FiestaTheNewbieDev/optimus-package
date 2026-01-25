@@ -1,9 +1,140 @@
 {
-  "id": "7c78fb35-d78c-49c3-b2ea-fe549669246c",
+  "id": "895ebd9b-0257-40df-b9a6-c2878acdb866",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.contact_messages": {
+      "name": "contact_messages",
+      "schema": "",
+      "columns": {
+        "uuid": {
+          "name": "uuid",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "profile_uuid": {
+          "name": "profile_uuid",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_name": {
+          "name": "organization_name",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(320)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone_number": {
+          "name": "phone_number",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "message": {
+          "name": "message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lang": {
+          "name": "lang",
+          "type": "varchar(5)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "email_idx": {
+          "name": "email_idx",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "phone_number_idx": {
+          "name": "phone_number_idx",
+          "columns": [
+            {
+              "expression": "phone_number",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "created_at_idx": {
+          "name": "created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "contact_messages_profile_uuid_profiles_uuid_fk": {
+          "name": "contact_messages_profile_uuid_profiles_uuid_fk",
+          "tableFrom": "contact_messages",
+          "tableTo": "profiles",
+          "columnsFrom": ["profile_uuid"],
+          "columnsTo": ["uuid"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.education": {
       "name": "education",
       "schema": "",
@@ -94,9 +225,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "skill_uuid": {
-          "name": "skill_uuid",
-          "type": "uuid",
+        "skill_slug": {
+          "name": "skill_slug",
+          "type": "varchar(64)",
           "primaryKey": false,
           "notNull": true
         },
@@ -119,20 +250,20 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "education_skills_skill_uuid_skills_uuid_fk": {
-          "name": "education_skills_skill_uuid_skills_uuid_fk",
+        "education_skills_skill_slug_skills_slug_fk": {
+          "name": "education_skills_skill_slug_skills_slug_fk",
           "tableFrom": "education_skills",
           "tableTo": "skills",
-          "columnsFrom": ["skill_uuid"],
-          "columnsTo": ["uuid"],
+          "columnsFrom": ["skill_slug"],
+          "columnsTo": ["slug"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
-        "education_skills_education_uuid_skill_uuid_pk": {
-          "name": "education_skills_education_uuid_skill_uuid_pk",
-          "columns": ["education_uuid", "skill_uuid"]
+        "education_skills_education_uuid_skill_slug_pk": {
+          "name": "education_skills_education_uuid_skill_slug_pk",
+          "columns": ["education_uuid", "skill_slug"]
         }
       },
       "uniqueConstraints": {},
@@ -230,9 +361,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "skill_uuid": {
-          "name": "skill_uuid",
-          "type": "uuid",
+        "skill_slug": {
+          "name": "skill_slug",
+          "type": "varchar(64)",
           "primaryKey": false,
           "notNull": true
         },
@@ -255,20 +386,20 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "experience_skills_skill_uuid_skills_uuid_fk": {
-          "name": "experience_skills_skill_uuid_skills_uuid_fk",
+        "experience_skills_skill_slug_skills_slug_fk": {
+          "name": "experience_skills_skill_slug_skills_slug_fk",
           "tableFrom": "experience_skills",
           "tableTo": "skills",
-          "columnsFrom": ["skill_uuid"],
-          "columnsTo": ["uuid"],
+          "columnsFrom": ["skill_slug"],
+          "columnsTo": ["slug"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
-        "experience_skills_experience_uuid_skill_uuid_pk": {
-          "name": "experience_skills_experience_uuid_skill_uuid_pk",
-          "columns": ["experience_uuid", "skill_uuid"]
+        "experience_skills_experience_uuid_skill_slug_pk": {
+          "name": "experience_skills_experience_uuid_skill_slug_pk",
+          "columns": ["experience_uuid", "skill_slug"]
         }
       },
       "uniqueConstraints": {},
@@ -293,6 +424,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "username": {
+          "name": "username",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp with time zone",
@@ -314,7 +451,13 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
+      "uniqueConstraints": {
+        "github_profiles_profile_uuid_unique": {
+          "name": "github_profiles_profile_uuid_unique",
+          "nullsNotDistinct": false,
+          "columns": ["profile_uuid"]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -335,6 +478,12 @@
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
         },
         "updated_at": {
           "name": "updated_at",
@@ -357,7 +506,13 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
+      "uniqueConstraints": {
+        "linkedin_profiles_profile_uuid_unique": {
+          "name": "linkedin_profiles_profile_uuid_unique",
+          "nullsNotDistinct": false,
+          "columns": ["profile_uuid"]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -403,6 +558,24 @@
           "primaryKey": false,
           "notNull": false
         },
+        "location": {
+          "name": "location",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_email": {
+          "name": "contact_email",
+          "type": "varchar(320)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_phone_number": {
+          "name": "contact_phone_number",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp with time zone",
@@ -429,9 +602,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "skill_uuid": {
-          "name": "skill_uuid",
-          "type": "uuid",
+        "skill_slug": {
+          "name": "skill_slug",
+          "type": "varchar(64)",
           "primaryKey": false,
           "notNull": true
         },
@@ -454,20 +627,20 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "profile_skills_skill_uuid_skills_uuid_fk": {
-          "name": "profile_skills_skill_uuid_skills_uuid_fk",
+        "profile_skills_skill_slug_skills_slug_fk": {
+          "name": "profile_skills_skill_slug_skills_slug_fk",
           "tableFrom": "profile_skills",
           "tableTo": "skills",
-          "columnsFrom": ["skill_uuid"],
-          "columnsTo": ["uuid"],
+          "columnsFrom": ["skill_slug"],
+          "columnsTo": ["slug"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
-        "profile_skills_profile_uuid_skill_uuid_pk": {
-          "name": "profile_skills_profile_uuid_skill_uuid_pk",
-          "columns": ["profile_uuid", "skill_uuid"]
+        "profile_skills_profile_uuid_skill_slug_pk": {
+          "name": "profile_skills_profile_uuid_skill_slug_pk",
+          "columns": ["profile_uuid", "skill_slug"]
         }
       },
       "uniqueConstraints": {},
@@ -553,9 +726,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "skill_uuid": {
-          "name": "skill_uuid",
-          "type": "uuid",
+        "skill_slug": {
+          "name": "skill_slug",
+          "type": "varchar(64)",
           "primaryKey": false,
           "notNull": true
         },
@@ -578,20 +751,20 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "project_skills_skill_uuid_skills_uuid_fk": {
-          "name": "project_skills_skill_uuid_skills_uuid_fk",
+        "project_skills_skill_slug_skills_slug_fk": {
+          "name": "project_skills_skill_slug_skills_slug_fk",
           "tableFrom": "project_skills",
           "tableTo": "skills",
-          "columnsFrom": ["skill_uuid"],
-          "columnsTo": ["uuid"],
+          "columnsFrom": ["skill_slug"],
+          "columnsTo": ["slug"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
-        "project_skills_project_uuid_skill_uuid_pk": {
-          "name": "project_skills_project_uuid_skill_uuid_pk",
-          "columns": ["project_uuid", "skill_uuid"]
+        "project_skills_project_uuid_skill_slug_pk": {
+          "name": "project_skills_project_uuid_skill_slug_pk",
+          "columns": ["project_uuid", "skill_slug"]
         }
       },
       "uniqueConstraints": {},
@@ -603,12 +776,11 @@
       "name": "skills",
       "schema": "",
       "columns": {
-        "uuid": {
-          "name": "uuid",
-          "type": "uuid",
+        "slug": {
+          "name": "slug",
+          "type": "varchar(64)",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "label": {
           "name": "label",
