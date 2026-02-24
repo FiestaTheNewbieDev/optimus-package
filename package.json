@@ -13,6 +13,11 @@
       "types": "./dist/index.d.ts"
     },
     "./entities": {
+      "require": "./dist/entities/index.cjs",
+      "import": "./dist/entities/index.mjs",
+      "types": "./dist/entities/index.d.ts"
+    },
+    "./entities/*": {
       "require": "./dist/entities/*.cjs",
       "import": "./dist/entities/*.mjs",
       "types": "./dist/entities/*.d.ts"
