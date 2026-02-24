@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import { profileSchema } from '@schemas/profile.schema';
 import {
   index,
@@ -8,21 +10,51 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
+/**
+ * @deprecated
+ */
 export const FIRST_NAME_MIN_LENGTH = 1;
+/**
+ * @deprecated
+ */
 export const FIRST_NAME_MAX_LENGTH = 64;
 
+/**
+ * @deprecated
+ */
 export const LAST_NAME_MIN_LENGTH = 1;
+/**
+ * @deprecated
+ */
 export const LAST_NAME_MAX_LENGTH = 64;
 
+/**
+ * @deprecated
+ */
 export const ORGANIZATION_NAME_MIN_LENGTH = 1;
+/**
+ * @deprecated
+ */
 export const ORGANIZATION_NAME_MAX_LENGTH = 128;
 
+/**
+ * @deprecated
+ */
 export const EMAIL_MAX_LENGTH = 320;
 
+/**
+ * @deprecated
+ */
 export const PHONE_NUMBER_MAX_LENGTH = 32;
 
+/**
+ * @deprecated
+ */
 export const LANG_MAX_LENGTH = 5;
 
+/**
+ * @deprecated
+ */
 export const contactMessageSchema = pgTable(
   'contact_messages',
   {

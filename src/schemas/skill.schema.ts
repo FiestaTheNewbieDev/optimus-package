@@ -1,11 +1,28 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import { pgEnum, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 
+/**
+ * @deprecated
+ */
 export const SLUG_MIN_LENGTH = 4;
+/**
+ * @deprecated
+ */
 export const SLUG_MAX_LENGTH = 64;
 
+/**
+ * @deprecated
+ */
 export const LABEL_MIN_LENGTH = 4;
+/**
+ * @deprecated
+ */
 export const LABEL_MAX_LENGTH = 64;
 
+/**
+ * @deprecated
+ */
 export const CATEGORIES = [
   'language',
   'framework',
@@ -21,8 +38,14 @@ export const CATEGORIES = [
   'other',
 ] as const;
 
+/**
+ * @deprecated
+ */
 export const categoryEnum = pgEnum('category', CATEGORIES);
 
+/**
+ * @deprecated
+ */
 export const skillSchema = pgTable('skills', {
   slug: varchar('slug', { length: SLUG_MAX_LENGTH }).primaryKey(),
 

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import { profileSchema } from '@schemas/profile.schema';
 import { skillSchema } from '@schemas/skill.schema';
 import {
@@ -10,11 +12,23 @@ import {
 } from 'drizzle-orm/pg-core';
 import { SLUG_MAX_LENGTH as SKILL_SLUG_MAX_LENGTH } from './skill.schema';
 
+/**
+ * @deprecated
+ */
 export const PROJECT_TITLE_MIN_LENGTH = 3;
+/**
+ * @deprecated
+ */
 export const PROJECT_TITLE_MAX_LENGTH = 255;
 
+/**
+ * @deprecated
+ */
 export const PROJECT_DESCRIPTION_MIN_LENGTH = 8;
 
+/**
+ * @deprecated
+ */
 export const projectSchema = pgTable('projects', {
   uuid: uuid('uuid').primaryKey().defaultRandom(),
   profileUuid: uuid('profile_uuid')
@@ -33,6 +47,9 @@ export const projectSchema = pgTable('projects', {
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
 });
 
+/**
+ * @deprecated
+ */
 export const projectSkillsSchema = pgTable(
   'project_skills',
   {

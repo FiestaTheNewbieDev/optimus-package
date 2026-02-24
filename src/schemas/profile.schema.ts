@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import { skillSchema } from '@schemas/skill.schema';
 import {
   pgTable,
@@ -9,20 +11,47 @@ import {
 } from 'drizzle-orm/pg-core';
 import { SLUG_MAX_LENGTH as SKILL_SLUG_MAX_LENGTH } from './skill.schema';
 
+/**
+ * @deprecated
+ */
 export const FIRST_NAME_MIN_LENGTH = 1;
+/**
+ * @deprecated
+ */
 export const FIRST_NAME_MAX_LENGTH = 64;
 
+/**
+ * @deprecated
+ */
 export const LAST_NAME_MIN_LENGTH = 1;
+/**
+ * @deprecated
+ */
 export const LAST_NAME_MAX_LENGTH = 64;
 
+/**
+ * @deprecated
+ */
 export const TITLE_MAX_LENGTH = 128;
 
+/**
+ * @deprecated
+ */
 export const LOCATION_MAX_LENGTH = 128;
 
+/**
+ * @deprecated
+ */
 export const CONTACT_EMAIL_MAX_LENGTH = 320;
 
+/**
+ * @deprecated
+ */
 export const CONTACT_PHONE_NUMBER_MAX_LENGTH = 32;
 
+/**
+ * @deprecated
+ */
 export const profileSchema = pgTable('profiles', {
   uuid: uuid('uuid').primaryKey().defaultRandom(),
 
@@ -42,8 +71,14 @@ export const profileSchema = pgTable('profiles', {
     .defaultNow(),
 });
 
+/**
+ * @deprecated
+ */
 export const LINKEDIN_SLUG_MAX_LENGTH = 64;
 
+/**
+ * @deprecated
+ */
 export const linkedInProfileSchema = pgTable('linkedin_profiles', {
   uuid: uuid('uuid').primaryKey().defaultRandom(),
   profileUuid: uuid('profile_uuid')
@@ -58,8 +93,14 @@ export const linkedInProfileSchema = pgTable('linkedin_profiles', {
     .defaultNow(),
 });
 
+/**
+ * @deprecated
+ */
 export const GITHUB_USERNAME_MAX_LENGTH = 64;
 
+/**
+ * @deprecated
+ */
 export const gitHubProfileSchema = pgTable('github_profiles', {
   uuid: uuid('uuid').primaryKey().defaultRandom(),
   profileUuid: uuid('profile_uuid')
@@ -76,6 +117,9 @@ export const gitHubProfileSchema = pgTable('github_profiles', {
     .defaultNow(),
 });
 
+/**
+ * @deprecated
+ */
 export const profileSkillsSchema = pgTable(
   'profile_skills',
   {

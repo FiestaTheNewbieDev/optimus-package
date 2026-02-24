@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import { profileSchema } from '@schemas/profile.schema';
 import { skillSchema } from '@schemas/skill.schema';
 import {
@@ -10,11 +12,23 @@ import {
 } from 'drizzle-orm/pg-core';
 import { SLUG_MAX_LENGTH as SKILL_SLUG_MAX_LENGTH } from './skill.schema';
 
+/**
+ * @deprecated
+ */
 export const EXPERIENCE_TITLE_MIN_LENGTH = 3;
+/**
+ * @deprecated
+ */
 export const EXPERIENCE_TITLE_MAX_LENGTH = 255;
 
+/**
+ * @deprecated
+ */
 export const EXPERIENCE_DESCRIPTION_MIN_LENGTH = 8;
 
+/**
+ * @deprecated
+ */
 export const experienceSchema = pgTable('experiences', {
   uuid: uuid('uuid').primaryKey().defaultRandom(),
   profileUuid: uuid('profile_uuid')
@@ -35,6 +49,9 @@ export const experienceSchema = pgTable('experiences', {
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
 });
 
+/**
+ * @deprecated
+ */
 export const experienceSkillsSchema = pgTable(
   'experience_skills',
   {
