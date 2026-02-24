@@ -4,7 +4,11 @@ import { InferSelectModel } from 'drizzle-orm';
 export type UserSchema = typeof userSchema;
 export type UserEntity = InferSelectModel<UserSchema>;
 
-export type UserRole = UserEntity['role'];
+export enum UserRole {
+  USER = 'user',
+  ADMIN = 'admin',
+  OWNER = 'owner',
+}
 
 export type MinimalUser = {
   uuid: UserEntity['uuid'];
