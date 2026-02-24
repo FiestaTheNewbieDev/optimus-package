@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-deprecated */
-
 import { profileSchema } from '@schemas/profile.schema';
 import { skillSchema } from '@schemas/skill.schema';
 import {

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-deprecated */
-
 import { skillSchema } from '@schemas/skill.schema';
 import {
   pgTable,

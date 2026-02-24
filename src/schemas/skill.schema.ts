@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-deprecated */
-
 import { pgEnum, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 
 /**
