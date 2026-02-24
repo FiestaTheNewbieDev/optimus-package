@@ -4,7 +4,7 @@ import tseslint from 'typescript-eslint';
 
 export default defineConfig([
   // Fichiers à ignorer globalement
-  globalIgnores(['node_modules/**', 'dist/**', '*.config.ts']),
+  globalIgnores(['node_modules/**', 'dist/**', '*.config.ts', 'migrations/**']),
 
   // Configuration TypeScript
   {
