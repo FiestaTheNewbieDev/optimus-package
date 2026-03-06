@@ -1,26 +1,19 @@
 import { AssociatedSkill } from '@/types/skills';
+import { ProfileEntity } from '@entities/profile.entity';
 import {
   gitHubProfileSchema,
   linkedInProfileSchema,
   profileSchema,
   profileSkillsSchema,
 } from '@schemas/profile.schema';
-import { InferSelectModel } from 'drizzle-orm';
 
 export type ProfileSchema = typeof profileSchema;
-export type ProfileEntity = InferSelectModel<ProfileSchema> & {
-  linkedIn: LinkedInProfileEntity;
-  gitHub: GitHubProfileEntity;
-};
 
 export type LinkedInProfileSchema = typeof linkedInProfileSchema;
-export type LinkedInProfileEntity = InferSelectModel<LinkedInProfileSchema>;
 
 export type GitHubProfileSchema = typeof gitHubProfileSchema;
-export type GitHubProfileEntity = InferSelectModel<GitHubProfileSchema>;
 
 export type ProfileSkillsSchema = typeof profileSkillsSchema;
-export type ProfileSkillsEntity = InferSelectModel<ProfileSkillsSchema>;
 
 export type ProfileSkill = AssociatedSkill;
 

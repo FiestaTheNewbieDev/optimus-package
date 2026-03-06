@@ -1,8 +1,4 @@
-import { userSchema } from '@schemas/user.schema';
-import { InferSelectModel } from 'drizzle-orm';
-
-export type UserSchema = typeof userSchema;
-export type UserEntity = InferSelectModel<UserSchema>;
+import { UserEntity } from '@entities/user.entity';
 
 export enum UserRole {
   USER = 'user',

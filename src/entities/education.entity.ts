@@ -1,5 +1,5 @@
-import { Profile } from '@entities/profile.entity';
-import { AbstractEntitySkills, Skill } from '@entities/skill.entity';
+import { ProfileEntity } from '@entities/profile.entity';
+import { AbstractEntitySkills, SkillEntity } from '@entities/skill.entity';
 import {
   Collection,
   Entity,
@@ -21,16 +21,16 @@ export const EDUCATION_DESCRIPTION_MIN_LENGTH = 8;
   name: 'notDeleted',
   cond: { deletedAt: null },
 })
-export class Education {
+export class EducationEntity {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   readonly uuid: Opt<string> = crypto.randomUUID();
 
-  @ManyToOne(() => Profile, {
+  @ManyToOne(() => ProfileEntity, {
     fieldName: 'profile_uuid',
     nullable: false,
     deleteRule: 'cascade',
   })
-  profile!: Profile;
+  profile!: ProfileEntity;
 
   @Property({
     name: 'title',
@@ -57,8 +57,11 @@ export class Education {
   })
   endDate?: Date;
 
-  @ManyToMany({ entity: () => Skill, pivotEntity: () => EducationSkills })
-  skills = new Collection<Skill>(this);
+  @ManyToMany({
+    entity: () => SkillEntity,
+    pivotEntity: () => EducationSkillsEntity,
+  })
+  skills = new Collection<SkillEntity>(this);
 
   @Property({
     name: 'created_at',
@@ -86,12 +89,12 @@ export class Education {
 }
 
 @Entity({ tableName: 'education_skills' })
-export class EducationSkills extends AbstractEntitySkills {
-  @ManyToOne(() => Education, {
+export class EducationSkillsEntity extends AbstractEntitySkills {
+  @ManyToOne(() => EducationEntity, {
     fieldName: 'education_uuid',
     nullable: false,
     deleteRule: 'cascade',
     primary: true,
   })
-  education!: Education;
+  education!: EducationEntity;
 }

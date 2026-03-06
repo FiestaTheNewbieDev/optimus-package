@@ -20,7 +20,7 @@ export const LABEL_MAX_LENGTH = 64;
   name: 'notDeleted',
   cond: { deletedAt: null },
 })
-export class Skill {
+export class SkillEntity {
   @PrimaryKey({ name: 'slug', type: 'varchar', length: SLUG_MAX_LENGTH })
   slug!: string;
 
@@ -68,13 +68,13 @@ export class Skill {
 }
 
 export abstract class AbstractEntitySkills {
-  @ManyToOne(() => Skill, {
+  @ManyToOne(() => SkillEntity, {
     fieldName: 'skill_slug',
     nullable: false,
     deleteRule: 'cascade',
     primary: true,
   })
-  skill!: Skill;
+  skill!: SkillEntity;
 
   @Property({
     name: 'created_at',

@@ -1,8 +1,7 @@
+import { SkillEntity } from '@entities/skill.entity';
 import { skillSchema } from '@schemas/skill.schema';
-import { InferSelectModel } from 'drizzle-orm';
 
 export type SkillSchema = typeof skillSchema;
-export type SkillEntity = InferSelectModel<SkillSchema>;
 
 // export type SkillCategory = SkillEntity['category'];
 

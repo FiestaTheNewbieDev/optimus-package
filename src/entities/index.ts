@@ -1,12 +1,12 @@
-export { ContactMessage } from './contact-message.entity';
-export { Education, EducationSkills } from './education.entity';
-export { Experience, ExperienceSkills } from './experience.entity';
+export { ContactMessageEntity } from './contact-message.entity';
+export { EducationEntity, EducationSkillsEntity } from './education.entity';
+export { ExperienceEntity, ExperienceSkillsEntity } from './experience.entity';
 export {
-  GitHubProfile,
-  LinkedInProfile,
-  Profile,
-  ProfileSkills,
+  GitHubProfileEntity,
+  LinkedInProfileEntity,
+  ProfileEntity,
+  ProfileSkillsEntity,
 } from './profile.entity';
-export { Project, ProjectSkills } from './project.entity';
-export { Skill } from './skill.entity';
-export { User } from './user.entity';
+export { ProjectEntity, ProjectSkillsEntity } from './project.entity';
+export { SkillEntity } from './skill.entity';
+export { UserEntity } from './user.entity';

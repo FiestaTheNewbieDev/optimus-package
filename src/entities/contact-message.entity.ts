@@ -31,7 +31,7 @@ export const LANG_MAX_LENGTH = 5;
 @Index({ name: 'email_idx', properties: ['email'] })
 @Index({ name: 'phone_number_idx', properties: ['phoneNumber'] })
 @Index({ name: 'created_at_idx', properties: ['createdAt'] })
-export class ContactMessage {
+export class ContactMessageEntity {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   readonly uuid: Opt<string> = crypto.randomUUID();
 

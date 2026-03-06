@@ -1,21 +1,19 @@
 import { AssociatedSkill } from '@/types/skills';
+import { EducationEntity } from '@entities/education.entity';
 import {
   educationSchema,
   educationSkillsSchema,
 } from '@schemas/education.schema';
-import { InferSelectModel } from 'drizzle-orm';
 
 export type EducationSchema = typeof educationSchema;
-export type EducationEntity = InferSelectModel<EducationSchema>;
 
 export type EducationSkillsSchema = typeof educationSkillsSchema;
-export type EducationSkillsEntity = InferSelectModel<EducationSkillsSchema>;
 
 export type EducationSkill = AssociatedSkill;
 
 export type Education = {
   uuid: EducationEntity['uuid'];
-  profileUuid: EducationEntity['profileUuid'];
+  profileUuid: EducationEntity['profile']['uuid'];
   title: EducationEntity['title'];
   description: EducationEntity['description'];
   startDate: EducationEntity['startDate'];

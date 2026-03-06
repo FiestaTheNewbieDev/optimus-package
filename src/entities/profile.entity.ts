@@ -1,4 +1,4 @@
-import { AbstractEntitySkills, Skill } from '@entities/skill.entity';
+import { AbstractEntitySkills, SkillEntity } from '@entities/skill.entity';
 import {
   Collection,
   Entity,
@@ -26,7 +26,7 @@ export const CONTACT_EMAIL_MAX_LENGTH = 320;
 export const CONTACT_PHONE_NUMBER_MAX_LENGTH = 32;
 
 @Entity({ tableName: 'profiles' })
-export class Profile {
+export class ProfileEntity {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   readonly uuid: Opt<string> = crypto.randomUUID();
 
@@ -89,20 +89,27 @@ export class Profile {
   contactPhoneNumber?: string;
 
   @OneToOne(
-    () => LinkedInProfile,
+    () => LinkedInProfileEntity,
     (linkedInProfile) => linkedInProfile.profile,
     { nullable: true, mappedBy: 'profile' },
   )
-  linkedInProfile?: Rel<LinkedInProfile>;
+  linkedInProfile?: Rel<LinkedInProfileEntity>;
 
-  @OneToOne(() => GitHubProfile, (gitHubProfile) => gitHubProfile.profile, {
-    nullable: true,
-    mappedBy: 'profile',
+  @OneToOne(
+    () => GitHubProfileEntity,
+    (gitHubProfile) => gitHubProfile.profile,
+    {
+      nullable: true,
+      mappedBy: 'profile',
+    },
+  )
+  gitHubProfile?: Rel<GitHubProfileEntity>;
+
+  @ManyToMany({
+    entity: () => SkillEntity,
+    pivotEntity: () => ProfileSkillsEntity,
   })
-  gitHubProfile?: Rel<GitHubProfile>;
-
-  @ManyToMany({ entity: () => Skill, pivotEntity: () => ProfileSkills })
-  skills = new Collection<Skill>(this);
+  skills = new Collection<SkillEntity>(this);
 
   @Property({
     name: 'updated_at',
@@ -117,7 +124,7 @@ export class Profile {
 export const LINKEDIN_SLUG_MAX_LENGTH = 64;
 
 @Entity({ tableName: 'linkedin_profiles' })
-export class LinkedInProfile {
+export class LinkedInProfileEntity {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   readonly uuid: Opt<string> = crypto.randomUUID();
 
@@ -137,19 +144,19 @@ export class LinkedInProfile {
   })
   updatedAt: Opt<Date> = new Date();
 
-  @OneToOne(() => Profile, {
+  @OneToOne(() => ProfileEntity, {
     fieldName: 'profile_uuid',
     nullable: false,
     deleteRule: 'cascade',
     unique: true,
   })
-  profile!: Profile;
+  profile!: ProfileEntity;
 }
 
 export const GITHUB_USERNAME_MAX_LENGTH = 64;
 
 @Entity({ tableName: 'github_profiles' })
-export class GitHubProfile {
+export class GitHubProfileEntity {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   readonly uuid: Opt<string> = crypto.randomUUID();
 
@@ -169,22 +176,22 @@ export class GitHubProfile {
   })
   updatedAt: Opt<Date> = new Date();
 
-  @OneToOne(() => Profile, {
+  @OneToOne(() => ProfileEntity, {
     fieldName: 'profile_uuid',
     nullable: false,
     deleteRule: 'cascade',
     unique: true,
   })
-  profile!: Profile;
+  profile!: ProfileEntity;
 }
 
 @Entity({ tableName: 'profile_skills' })
-export class ProfileSkills extends AbstractEntitySkills {
-  @ManyToOne(() => Profile, {
+export class ProfileSkillsEntity extends AbstractEntitySkills {
+  @ManyToOne(() => ProfileEntity, {
     fieldName: 'profile_uuid',
     nullable: false,
     deleteRule: 'cascade',
     primary: true,
   })
-  profile!: Profile;
+  profile!: ProfileEntity;
 }

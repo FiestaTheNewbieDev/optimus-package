@@ -19,7 +19,7 @@ export const EMAIL_MAX_LENGTH = 320;
   name: 'notDeleted',
   cond: { deletedAt: null },
 })
-export class User {
+export class UserEntity {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   readonly uuid: Opt<string> = crypto.randomUUID();
 

@@ -1,5 +1,5 @@
-import { Profile } from '@entities/profile.entity';
-import { AbstractEntitySkills, Skill } from '@entities/skill.entity';
+import { ProfileEntity } from '@entities/profile.entity';
+import { AbstractEntitySkills, SkillEntity } from '@entities/skill.entity';
 import {
   Collection,
   Entity,
@@ -21,16 +21,16 @@ export const EXPERIENCE_DESCRIPTION_MIN_LENGTH = 8;
   name: 'notDeleted',
   cond: { deletedAt: null },
 })
-export class Experience {
+export class ExperienceEntity {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   readonly uuid: Opt<string> = crypto.randomUUID();
 
-  @ManyToOne(() => Profile, {
+  @ManyToOne(() => ProfileEntity, {
     fieldName: 'profile_uuid',
     nullable: false,
     deleteRule: 'cascade',
   })
-  profile!: Profile;
+  profile!: ProfileEntity;
 
   @Property({
     name: 'title',
@@ -57,8 +57,11 @@ export class Experience {
   })
   endDate?: Date;
 
-  @ManyToMany({ entity: () => Skill, pivotEntity: () => ExperienceSkills })
-  skills = new Collection<Skill>(this);
+  @ManyToMany({
+    entity: () => SkillEntity,
+    pivotEntity: () => ExperienceSkillsEntity,
+  })
+  skills = new Collection<SkillEntity>(this);
 
   @Property({
     name: 'created_at',
@@ -86,12 +89,12 @@ export class Experience {
 }
 
 @Entity({ tableName: 'experience_skills' })
-export class ExperienceSkills extends AbstractEntitySkills {
-  @ManyToOne(() => Experience, {
+export class ExperienceSkillsEntity extends AbstractEntitySkills {
+  @ManyToOne(() => ExperienceEntity, {
     fieldName: 'experience_uuid',
     nullable: false,
     deleteRule: 'cascade',
     primary: true,
   })
-  experience!: Experience;
+  experience!: ExperienceEntity;
 }
