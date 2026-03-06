@@ -12,6 +12,7 @@ export default defineConfig((options) => ({
   sourcemap: true,
   clean: true,
   minify: !options.watch,
+  keepNames: true,
   skipNodeModulesBundle: true,
   outExtension: ({ format }) => ({
     js: format === 'cjs' ? '.cjs' : '.mjs',
