@@ -33,7 +33,7 @@ export const LANG_MAX_LENGTH = 5;
 @Index({ name: 'created_at_idx', properties: ['createdAt'] })
 export class ContactMessage {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
-  uuid: Opt<string> = crypto.randomUUID();
+  readonly uuid: Opt<string> = crypto.randomUUID();
 
   @ManyToOne({
     name: 'profile_uuid',
@@ -100,7 +100,7 @@ export class ContactMessage {
     nullable: false,
     defaultRaw: 'now()',
   })
-  createdAt: Opt<Date> = new Date();
+  readonly createdAt: Opt<Date> = new Date();
 
   @Property({
     name: 'deleted_at',

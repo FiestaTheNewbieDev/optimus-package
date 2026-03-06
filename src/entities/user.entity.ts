@@ -1,5 +1,12 @@
 import { UserRole } from '@/types';
-import { Entity, Enum, Filter, PrimaryKey, Property } from '@mikro-orm/core';
+import {
+  Entity,
+  Enum,
+  Filter,
+  Opt,
+  PrimaryKey,
+  Property,
+} from '@mikro-orm/core';
 
 export const USERNAME_MIN_LENGTH = 3;
 export const USERNAME_MAX_LENGTH = 32;
@@ -14,7 +21,7 @@ export const EMAIL_MAX_LENGTH = 320;
 })
 export class User {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
-  uuid: string = crypto.randomUUID();
+  readonly uuid: Opt<string> = crypto.randomUUID();
 
   @Property({
     name: 'username',
@@ -44,7 +51,7 @@ export class User {
     default: 'user',
     nativeEnumName: 'user_role',
   })
-  role: UserRole = UserRole.USER;
+  role: Opt<UserRole> = UserRole.USER;
 
   @Property({
     name: 'created_at',
@@ -52,7 +59,7 @@ export class User {
     nullable: false,
     defaultRaw: 'now()',
   })
-  createdAt: Date = new Date();
+  readonly createdAt: Opt<Date> = new Date();
 
   @Property({
     name: 'updated_at',
@@ -60,7 +67,7 @@ export class User {
     nullable: false,
     defaultRaw: 'now()',
   })
-  updatedAt: Date = new Date();
+  readonly updatedAt: Opt<Date> = new Date();
 
   @Property({
     name: 'deleted_at',

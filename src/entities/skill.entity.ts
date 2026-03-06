@@ -4,6 +4,7 @@ import {
   Enum,
   Filter,
   ManyToOne,
+  Opt,
   PrimaryKey,
   Property,
 } from '@mikro-orm/core';
@@ -48,7 +49,7 @@ export class Skill {
     nullable: false,
     defaultRaw: 'now()',
   })
-  createdAt: Date = new Date();
+  readonly createdAt: Opt<Date> = new Date();
 
   @Property({
     name: 'updated_at',
@@ -56,7 +57,7 @@ export class Skill {
     nullable: false,
     defaultRaw: 'now()',
   })
-  updatedAt: Date = new Date();
+  updatedAt: Opt<Date> = new Date();
 
   @Property({
     name: 'deleted_at',
@@ -81,5 +82,5 @@ export abstract class AbstractEntitySkills {
     nullable: false,
     defaultRaw: 'now()',
   })
-  createdAt: Date = new Date();
+  readonly createdAt: Opt<Date> = new Date();
 }
