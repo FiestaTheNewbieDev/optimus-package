@@ -22,7 +22,7 @@ export const EDUCATION_DESCRIPTION_MIN_LENGTH = 8;
 })
 export class Education {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
-  uuid!: string;
+  uuid: string = crypto.randomUUID();
 
   @ManyToOne(() => Profile, {
     fieldName: 'profile_uuid',
@@ -65,7 +65,7 @@ export class Education {
     nullable: false,
     defaultRaw: 'now()',
   })
-  createdAt!: Date;
+  createdAt: Date = new Date();
 
   @Property({
     name: 'updated_at',
@@ -74,7 +74,7 @@ export class Education {
     defaultRaw: 'now()',
     onUpdate: () => new Date(),
   })
-  updatedAt!: Date;
+  updatedAt: Date = new Date();
 
   @Property({
     name: 'deleted_at',

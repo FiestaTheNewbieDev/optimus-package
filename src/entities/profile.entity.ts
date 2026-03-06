@@ -27,7 +27,7 @@ export const CONTACT_PHONE_NUMBER_MAX_LENGTH = 32;
 @Entity({ tableName: 'profiles' })
 export class Profile {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
-  uuid!: string;
+  uuid: string = crypto.randomUUID();
 
   @Property({
     name: 'first_name',
@@ -110,7 +110,7 @@ export class Profile {
     defaultRaw: 'now()',
     onUpdate: () => new Date(),
   })
-  updatedAt!: Date;
+  updatedAt: Date = new Date();
 }
 
 export const LINKEDIN_SLUG_MAX_LENGTH = 64;
@@ -118,7 +118,7 @@ export const LINKEDIN_SLUG_MAX_LENGTH = 64;
 @Entity({ tableName: 'linkedin_profiles' })
 export class LinkedInProfile {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
-  uuid!: string;
+  uuid: string = crypto.randomUUID();
 
   @Property({
     name: 'slug',
@@ -134,7 +134,7 @@ export class LinkedInProfile {
     defaultRaw: 'now()',
     onUpdate: () => new Date(),
   })
-  updatedAt!: Date;
+  updatedAt: Date = new Date();
 
   @OneToOne(() => Profile, {
     fieldName: 'profile_uuid',
@@ -150,7 +150,7 @@ export const GITHUB_USERNAME_MAX_LENGTH = 64;
 @Entity({ tableName: 'github_profiles' })
 export class GitHubProfile {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
-  uuid!: string;
+  uuid: string = crypto.randomUUID();
 
   @Property({
     name: 'username',
@@ -166,7 +166,7 @@ export class GitHubProfile {
     defaultRaw: 'now()',
     onUpdate: () => new Date(),
   })
-  updatedAt!: Date;
+  updatedAt: Date = new Date();
 
   @OneToOne(() => Profile, {
     fieldName: 'profile_uuid',

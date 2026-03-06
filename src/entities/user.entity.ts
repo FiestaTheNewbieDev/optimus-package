@@ -14,7 +14,7 @@ export const EMAIL_MAX_LENGTH = 320;
 })
 export class User {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
-  uuid!: string;
+  uuid: string = crypto.randomUUID();
 
   @Property({
     name: 'username',
@@ -44,7 +44,7 @@ export class User {
     default: 'user',
     nativeEnumName: 'user_role',
   })
-  role!: UserRole;
+  role: UserRole = UserRole.USER;
 
   @Property({
     name: 'created_at',
@@ -52,7 +52,7 @@ export class User {
     nullable: false,
     defaultRaw: 'now()',
   })
-  createdAt!: Date;
+  createdAt: Date = new Date();
 
   @Property({
     name: 'updated_at',
@@ -60,7 +60,7 @@ export class User {
     nullable: false,
     defaultRaw: 'now()',
   })
-  updatedAt!: Date;
+  updatedAt: Date = new Date();
 
   @Property({
     name: 'deleted_at',

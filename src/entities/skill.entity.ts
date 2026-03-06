@@ -48,7 +48,7 @@ export class Skill {
     nullable: false,
     defaultRaw: 'now()',
   })
-  createdAt!: Date;
+  createdAt: Date = new Date();
 
   @Property({
     name: 'updated_at',
@@ -56,7 +56,7 @@ export class Skill {
     nullable: false,
     defaultRaw: 'now()',
   })
-  updatedAt!: Date;
+  updatedAt: Date = new Date();
 
   @Property({
     name: 'deleted_at',
@@ -81,5 +81,5 @@ export abstract class AbstractEntitySkills {
     nullable: false,
     defaultRaw: 'now()',
   })
-  createdAt!: Date;
+  createdAt: Date = new Date();
 }
