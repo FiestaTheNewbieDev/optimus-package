@@ -25,7 +25,6 @@
     "rootDir": "./src",
     "paths": {
       "@entities/*": ["./src/entities/*"],
-      "@schemas/*": ["./src/schemas/*"],
       "@/*": ["./src/*"]
     }
   },

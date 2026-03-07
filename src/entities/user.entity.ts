@@ -66,8 +66,9 @@ export class UserEntity {
     type: 'timestamp with time zone',
     nullable: false,
     defaultRaw: 'now()',
+    onUpdate: () => new Date(),
   })
-  readonly updatedAt: Opt<Date> = new Date();
+  updatedAt: Opt<Date> = new Date();
 
   @Property({
     name: 'deleted_at',

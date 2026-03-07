@@ -9,6 +9,7 @@ import {
   Opt,
   PrimaryKey,
   Property,
+  Ref,
 } from '@mikro-orm/core';
 
 export const EXPERIENCE_TITLE_MIN_LENGTH = 3;
@@ -30,7 +31,7 @@ export class ExperienceEntity {
     nullable: false,
     deleteRule: 'cascade',
   })
-  profile!: ProfileEntity;
+  profile!: Ref<ProfileEntity>;
 
   @Property({
     name: 'title',
@@ -96,5 +97,5 @@ export class ExperienceSkillsEntity extends AbstractEntitySkills {
     deleteRule: 'cascade',
     primary: true,
   })
-  experience!: ExperienceEntity;
+  experience!: Ref<ExperienceEntity>;
 }

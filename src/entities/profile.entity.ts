@@ -8,6 +8,7 @@ import {
   Opt,
   PrimaryKey,
   Property,
+  Ref,
   Rel,
 } from '@mikro-orm/core';
 
@@ -112,6 +113,14 @@ export class ProfileEntity {
   skills = new Collection<SkillEntity>(this);
 
   @Property({
+    name: 'created_at',
+    type: 'timestamp with time zone',
+    nullable: false,
+    defaultRaw: 'now()',
+  })
+  readonly createdAt: Opt<Date> = new Date();
+
+  @Property({
     name: 'updated_at',
     type: 'timestamp with time zone',
     nullable: false,
@@ -139,6 +148,7 @@ export class LinkedInProfileEntity {
   @Property({
     name: 'updated_at',
     type: 'timestamp with time zone',
+    nullable: false,
     defaultRaw: 'now()',
     onUpdate: () => new Date(),
   })
@@ -150,7 +160,7 @@ export class LinkedInProfileEntity {
     deleteRule: 'cascade',
     unique: true,
   })
-  profile!: ProfileEntity;
+  profile!: Ref<ProfileEntity>;
 }
 
 export const GITHUB_USERNAME_MAX_LENGTH = 64;
@@ -171,6 +181,7 @@ export class GitHubProfileEntity {
   @Property({
     name: 'updated_at',
     type: 'timestamp with time zone',
+    nullable: false,
     defaultRaw: 'now()',
     onUpdate: () => new Date(),
   })
@@ -182,7 +193,7 @@ export class GitHubProfileEntity {
     deleteRule: 'cascade',
     unique: true,
   })
-  profile!: ProfileEntity;
+  profile!: Ref<ProfileEntity>;
 }
 
 @Entity({ tableName: 'profile_skills' })
@@ -193,5 +204,5 @@ export class ProfileSkillsEntity extends AbstractEntitySkills {
     deleteRule: 'cascade',
     primary: true,
   })
-  profile!: ProfileEntity;
+  profile!: Ref<ProfileEntity>;
 }

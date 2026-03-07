@@ -7,6 +7,7 @@ import {
   Opt,
   PrimaryKey,
   Property,
+  Ref,
 } from '@mikro-orm/core';
 
 export const SLUG_MIN_LENGTH = 4;
@@ -56,6 +57,7 @@ export class SkillEntity {
     type: 'timestamp with time zone',
     nullable: false,
     defaultRaw: 'now()',
+    onUpdate: () => new Date(),
   })
   updatedAt: Opt<Date> = new Date();
 
@@ -74,7 +76,7 @@ export abstract class AbstractEntitySkills {
     deleteRule: 'cascade',
     primary: true,
   })
-  skill!: SkillEntity;
+  skill!: Ref<SkillEntity>;
 
   @Property({
     name: 'created_at',

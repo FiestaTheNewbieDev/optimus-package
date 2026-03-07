@@ -1,10 +1,3 @@
-import { SkillEntity } from '@entities/skill.entity';
-import { skillSchema } from '@schemas/skill.schema';
-
-export type SkillSchema = typeof skillSchema;
-
-// export type SkillCategory = SkillEntity['category'];
-
 export enum SkillCategory {
   LANGUAGE = 'language',
   FRAMEWORK = 'framework',
@@ -21,18 +14,18 @@ export enum SkillCategory {
 }
 
 export type Skill = {
-  slug: SkillEntity['slug'];
-  label: SkillEntity['label'];
-  iconUrl: SkillEntity['iconUrl'];
+  slug: string;
+  label: string;
+  iconUrl: string | null;
   category: SkillCategory;
-  createdAt: SkillEntity['createdAt'];
-  updatedAt: SkillEntity['updatedAt'];
-  deletedAt: SkillEntity['deletedAt'];
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
 };
 
-export type AssociatedSkill<TData = unknown> = Omit<
-  Skill,
-  'createdAt' | 'updatedAt' | 'deletedAt'
-> & {
+export type AssociatedSkill<
+  TData extends Record<string, unknown> = Record<string, unknown>,
+> = {
   associatedAt: Date;
+  skill: Skill;
 } & TData;

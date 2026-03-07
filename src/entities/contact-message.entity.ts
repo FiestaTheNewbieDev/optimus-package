@@ -1,3 +1,4 @@
+import { ProfileEntity } from '@entities/profile.entity';
 import {
   Entity,
   Filter,
@@ -6,6 +7,7 @@ import {
   Opt,
   PrimaryKey,
   Property,
+  Ref,
 } from '@mikro-orm/core';
 
 export const FIRST_NAME_MIN_LENGTH = 1;
@@ -36,12 +38,11 @@ export class ContactMessageEntity {
   readonly uuid: Opt<string> = crypto.randomUUID();
 
   @ManyToOne({
-    name: 'profile_uuid',
-    entity: () => 'Profile',
+    fieldName: 'profile_uuid',
     nullable: false,
     deleteRule: 'cascade',
   })
-  profile!: string;
+  profile!: Ref<ProfileEntity>;
 
   @Property({
     name: 'first_name',

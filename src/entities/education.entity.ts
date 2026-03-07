@@ -9,6 +9,7 @@ import {
   Opt,
   PrimaryKey,
   Property,
+  Ref,
 } from '@mikro-orm/core';
 
 export const EDUCATION_TITLE_MIN_LENGTH = 3;
@@ -30,7 +31,7 @@ export class EducationEntity {
     nullable: false,
     deleteRule: 'cascade',
   })
-  profile!: ProfileEntity;
+  profile!: Ref<ProfileEntity>;
 
   @Property({
     name: 'title',
@@ -96,5 +97,5 @@ export class EducationSkillsEntity extends AbstractEntitySkills {
     deleteRule: 'cascade',
     primary: true,
   })
-  education!: EducationEntity;
+  education!: Ref<EducationEntity>;
 }
