@@ -1,9 +1,13 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20260224065010 extends Migration {
+export class Migration20260315085034 extends Migration {
   override async up(): Promise<void> {
     this.addSql(
-      `create table "profiles" ("uuid" uuid not null default gen_random_uuid(), "first_name" varchar(64) not null, "last_name" varchar(64) not null, "title" varchar(128) null, "biography" text null, "birth_date" timestamptz null, "location" varchar(128) null, "contact_email" varchar(320) null, "contact_phone_number" varchar(32) null, "updated_at" timestamptz not null default now(), constraint "profiles_pkey" primary key ("uuid"));`,
+      `create type "skill_category" as enum ('language', 'framework', 'library', 'database', 'tool', 'cloud', 'devops', 'testing', 'architecture', 'methodology', 'softskill', 'other');`,
+    );
+    this.addSql(`create type "user_role" as enum ('user', 'admin', 'owner');`);
+    this.addSql(
+      `create table "profiles" ("uuid" uuid not null default gen_random_uuid(), "first_name" varchar(64) not null, "last_name" varchar(64) not null, "title" varchar(128) null, "biography" text null, "birth_date" timestamptz null, "location" varchar(128) null, "contact_email" varchar(320) null, "contact_phone_number" varchar(32) null, "created_at" timestamptz not null default now(), "updated_at" timestamptz not null default now(), constraint "profiles_pkey" primary key ("uuid"));`,
     );
 
     this.addSql(
@@ -208,5 +212,8 @@ export class Migration20260224065010 extends Migration {
     this.addSql(`drop table if exists "education_skills" cascade;`);
 
     this.addSql(`drop table if exists "users" cascade;`);
+
+    this.addSql(`drop type "skill_category";`);
+    this.addSql(`drop type "user_role";`);
   }
 }
