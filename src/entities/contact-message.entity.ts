@@ -37,7 +37,7 @@ export class ContactMessageEntity {
   @PrimaryKey({ name: 'uuid', type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   readonly uuid: Opt<string> = crypto.randomUUID();
 
-  @ManyToOne({
+  @ManyToOne(() => ProfileEntity, {
     fieldName: 'profile_uuid',
     nullable: false,
     deleteRule: 'cascade',
