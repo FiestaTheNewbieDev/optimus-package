@@ -1,2 +1,0 @@
-CREATE TYPE "public"."category" AS ENUM('language', 'framework', 'library', 'database', 'tool', 'cloud', 'devops', 'testing', 'architecture', 'methodology', 'softskill', 'other');--> statement-breakpoint
-ALTER TABLE "skills" ADD COLUMN "category" "category" NOT NULL;
