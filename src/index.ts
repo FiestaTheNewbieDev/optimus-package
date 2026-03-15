@@ -1,3 +1,2 @@
-export * from '@/drizzle';
 export * from '@/types';
-export * from '@schemas/index';
+export * from '@entities/index';

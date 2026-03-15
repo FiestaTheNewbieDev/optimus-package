@@ -10,6 +10,8 @@
     // "verbatimModuleSyntax": true,
     "noEmit": true,
     "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
@@ -22,7 +24,7 @@
     "sourceMap": true,
     "rootDir": "./src",
     "paths": {
-      "@schemas/*": ["./src/schemas/*"],
+      "@entities/*": ["./src/entities/*"],
       "@/*": ["./src/*"]
     }
   },

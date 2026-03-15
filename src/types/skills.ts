@@ -1,24 +1,31 @@
-import { skillSchema } from '@schemas/skill.schema';
-import { InferSelectModel } from 'drizzle-orm';
-
-export type SkillSchema = typeof skillSchema;
-export type SkillEntity = InferSelectModel<SkillSchema>;
-
-export type SkillCategory = SkillEntity['category'];
+export enum SkillCategory {
+  LANGUAGE = 'language',
+  FRAMEWORK = 'framework',
+  LIBRARY = 'library',
+  DATABASE = 'database',
+  TOOL = 'tool',
+  CLOUD = 'cloud',
+  DEVOPS = 'devops',
+  TESTING = 'testing',
+  ARCHITECTURE = 'architecture',
+  METHODOLOGY = 'methodology',
+  SOFTSKILL = 'softskill',
+  OTHER = 'other',
+}
 
 export type Skill = {
-  slug: SkillEntity['slug'];
-  label: SkillEntity['label'];
-  iconUrl: SkillEntity['iconUrl'];
+  slug: string;
+  label: string;
+  iconUrl: string | null;
   category: SkillCategory;
-  createdAt: SkillEntity['createdAt'];
-  updatedAt: SkillEntity['updatedAt'];
-  deletedAt: SkillEntity['deletedAt'];
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
 };
 
-export type AssociatedSkill<TData = unknown> = Omit<
-  Skill,
-  'createdAt' | 'updatedAt' | 'deletedAt'
-> & {
+export type AssociatedSkill<
+  TData extends Record<string, unknown> = Record<string, unknown>,
+> = {
   associatedAt: Date;
+  skill: Skill;
 } & TData;

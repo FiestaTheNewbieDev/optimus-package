@@ -12,15 +12,15 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     },
-    "./schemas": {
-      "require": "./dist/schemas/*.cjs",
-      "import": "./dist/schemas/*.mjs",
-      "types": "./dist/schemas/*.d.ts"
+    "./entities": {
+      "require": "./dist/entities/index.cjs",
+      "import": "./dist/entities/index.mjs",
+      "types": "./dist/entities/index.d.ts"
     },
-    "./schemas/*": {
-      "require": "./dist/schemas/*.cjs",
-      "import": "./dist/schemas/*.mjs",
-      "types": "./dist/schemas/*.d.ts"
+    "./entities/*": {
+      "require": "./dist/entities/*.cjs",
+      "import": "./dist/entities/*.mjs",
+      "types": "./dist/entities/*.d.ts"
     }
   },
   "files": [
@@ -28,13 +28,12 @@
   ],
   "scripts": {
     "build": "tsup",
-    "drizzle:generate": "drizzle-kit generate",
-    "drizzle:migrate": "drizzle-kit migrate",
-    "drizzle:push": "drizzle-kit push",
-    "drizzle:studio": "drizzle-kit studio",
     "lint": "eslint .",
     "lint:fix": "npm run format && eslint --fix .",
     "format": "prettier --write .",
+    "makemigrations": "mikro-orm migration:create",
+    "migrate": "mikro-orm migration:up",
+    "migrate:down": "mikro-orm migration:down",
     "prepare": "husky && npm run build"
   },
   "repository": {
@@ -50,15 +49,17 @@
   },
   "homepage": "https://github.com/FiestaTheNewbieDev/optimus-package#readme",
   "dependencies": {
+    "@mikro-orm/migrations": "^6.6.7",
     "dotenv": "^17.2.3"
   },
   "peerDependencies": {
-    "drizzle-kit": "^0.31.8",
-    "drizzle-orm": "^0.45.1",
+    "@mikro-orm/core": "^6.6.7",
+    "@mikro-orm/postgresql": "^6.6.7",
     "pg": "^8.16.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@mikro-orm/cli": "^6.6.7",
     "@types/node": "^25.0.2",
     "@types/pg": "^8.16.0",
     "eslint": "^9.39.2",
@@ -67,16 +68,18 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "prettier-plugin-organize-imports": "^4.3.0",
+    "ts-node": "^10.9.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.50.0"
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "npm run lint:fix"
+      "prettier --write",
+      "eslint --fix"
     ],
     "*.{json,md,yml,yaml}": [
-      "npm run format"
+      "prettier --write"
     ]
   }
 }

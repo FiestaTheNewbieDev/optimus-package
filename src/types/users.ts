@@ -1,23 +1,21 @@
-import { userSchema } from '@schemas/user.schema';
-import { InferSelectModel } from 'drizzle-orm';
-
-export type UserSchema = typeof userSchema;
-export type UserEntity = InferSelectModel<UserSchema>;
-
-export type UserRole = UserEntity['role'];
+export enum UserRole {
+  USER = 'user',
+  ADMIN = 'admin',
+  OWNER = 'owner',
+}
 
 export type MinimalUser = {
-  uuid: UserEntity['uuid'];
-  username: UserEntity['username'];
+  uuid: string;
+  username: string;
 };
 
 export type User = MinimalUser & {
-  createdAt: UserEntity['createdAt'];
-  updatedAt: UserEntity['updatedAt'];
-  deletedAt: UserEntity['deletedAt'];
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
 };
 
 export type PrivateUser = User & {
-  email: UserEntity['email'];
+  email: string;
   role: UserRole;
 };
