@@ -8,6 +8,10 @@ export default defineConfig((options) => ({
     'src/types/**/*.ts',
   ],
   format: ['cjs', 'esm'],
+  banner: ({ format }) =>
+    format === 'cjs'
+      ? { js: `Object.defineProperty(exports, '__esModule', { value: true });` }
+      : {},
   dts: true,
   sourcemap: true,
   clean: true,
